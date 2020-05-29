@@ -1,6 +1,6 @@
 package class01;
 
-public class Code03_RotateMatrix {
+public class Code04_RotateMatrix {
 
 	public static void rotate(int[][] matrix) {
 		int a = 0;

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class AC {
+public class Code01_AC {
 
 	// 前缀树的节点
 	public static class Node {

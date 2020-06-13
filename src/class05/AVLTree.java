@@ -84,22 +84,18 @@ public class AVLTree extends AbstractSelfBalancingBinarySearchTree {
 			int leftHeight = (node.left == null) ? -1 : ((AVLNode) node.left).height;
 			int rightHeight = (node.right == null) ? -1 : ((AVLNode) node.right).height;
 			int nodeBalance = rightHeight - leftHeight;
-			// rebalance (-2 means left subtree outgrow, 2 means right subtree)
+			// rebalance (-2 means left subtree outgrow, 2 means right subtree outgrow)
 			if (nodeBalance == 2) {
-				if (node.right.right != null) {
+				if (node.right.right != null && ((AVLNode) node.right.right).height == leftHeight + 1) {
 					node = (AVLNode) avlRotateLeft(node);
-					break;
 				} else {
 					node = (AVLNode) doubleRotateRightLeft(node);
-					break;
 				}
 			} else if (nodeBalance == -2) {
-				if (node.left.left != null) {
+				if (node.left.left != null && ((AVLNode) node.left.left).height == rightHeight + 1) {
 					node = (AVLNode) avlRotateRight(node);
-					break;
 				} else {
 					node = (AVLNode) doubleRotateLeftRight(node);
-					break;
 				}
 			} else {
 				updateHeight(node);

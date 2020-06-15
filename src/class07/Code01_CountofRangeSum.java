@@ -161,17 +161,18 @@ public class Code01_CountofRangeSum {
 		SizeBalancedTreeSet treeSet = new SizeBalancedTreeSet();
 		long sum = 0;
 		int ans = 0;
-		treeSet.add(0);
+		treeSet.add(0);// 一个数都没有的时候，就已经有一个前缀和累加和为0，
 		for (int i = 0; i < nums.length; i++) {
 			sum += nums[i];
-			// sum = x [a,b] start > x-a -start < -x+a x-start < a
-			// [a,b]
-			// < a > b
-			// i + 1 <a - <b
-			long lessLowers = treeSet.moreKeySize(sum - lower);
-			// sum = x [a,b] start < x-b -start > -x+b x-start > b
-			long moreUppers = treeSet.lessKeySize(sum - upper);
-			ans += i + 1 - lessLowers - moreUppers;
+			// sum    i结尾的时候[lower, upper]
+			// 之前所有前缀累加和中，有多少累加和落在[sum - upper, sum - lower]
+			// 查 ？ < sum - lower + 1   a
+			// 查 ?  < sum - upper    b
+			// a - b
+			
+			long a = treeSet.lessKeySize(sum - lower + 1);
+			long b = treeSet.lessKeySize(sum - upper);
+			ans += a - b;
 			treeSet.add(sum);
 		}
 		return ans;

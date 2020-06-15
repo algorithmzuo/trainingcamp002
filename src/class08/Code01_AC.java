@@ -60,6 +60,7 @@ public class Code01_AC {
 				cur = queue.poll();
 				for (int i = 0; i < 26; i++) { // 所有的路
 					if (cur.nexts[i] != null) { // 找到所有有效的路
+						// cur.nexts[i] 子
 						cur.nexts[i].fail = root; //
 						cfail = cur.fail;
 						while (cfail != null) {
@@ -79,17 +80,18 @@ public class Code01_AC {
 			char[] str = content.toCharArray();
 			Node cur = root;
 			Node follow = null;
-			int index = 0;
+			int path = 0;
 			List<String> ans = new ArrayList<>();
-			for (int i = 0; i < str.length; i++) {
-				index = str[i] - 'a'; // 路
+			for (int i = 0; i < str.length; i++) { // 依次遍历文章中的字符，i位置
+				path = str[i] - 'a'; // 路
 				// 如果当前字符在这条路上没配出来，就随着fail方向走向下条路径
-				while (cur.nexts[index] == null && cur != root) {
+				// 如果当前cur节点，没有path的路，就通过fail，跳到别的前缀上去
+				while (cur.nexts[path] == null && cur != root) {
 					cur = cur.fail;
 				}
 				// 1) 现在来到的路径，是可以继续匹配的
-				// 2) 现在来到的节点，就是前缀树的根节点
-				cur = cur.nexts[index] != null ? cur.nexts[index] : root;
+				// 2) 现在来到的节点，已经是头了
+				cur = cur.nexts[path] != null ? cur.nexts[path] : root;
 				follow = cur;
 				while (follow != root) {
 					if(follow.endUse) {

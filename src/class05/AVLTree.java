@@ -81,6 +81,8 @@ public class AVLTree extends AbstractSelfBalancingBinarySearchTree {
 
 			Node parent = node.parent;
 
+			// 空树  -1
+			// 叶节点  0
 			int leftHeight = (node.left == null) ? -1 : ((AVLNode) node.left).height;
 			int rightHeight = (node.right == null) ? -1 : ((AVLNode) node.right).height;
 			int nodeBalance = rightHeight - leftHeight;

@@ -24,7 +24,8 @@ public class Code01_SizeBalancedTreeMap {
 			cur.l = leftNode.r;
 			leftNode.r = cur;
 			leftNode.size = cur.size;
-			cur.size = (cur.l != null ? cur.l.size : 0) + (cur.r != null ? cur.r.size : 0) + 1;
+			cur.size = (cur.l != null ? cur.l.size : 0) 
+					+ (cur.r != null ? cur.r.size : 0) + 1;
 			return leftNode;
 		}
 
@@ -115,7 +116,7 @@ public class Code01_SizeBalancedTreeMap {
 			return ans;
 		}
 
-		// 现在，以cur为头的树上，加(key, value)这样的记录
+		// 现在，以cur为头的树上，新增，加(key, value)这样的记录
 		// 加完之后，会对cur做检查，该调整调整
 		// 返回，调整完之后，整棵树的新头部
 		private SBTNode<K, V> add(SBTNode<K, V> cur, K key, V value) {
@@ -169,6 +170,7 @@ public class Code01_SizeBalancedTreeMap {
 					cur = des;
 				}
 			}
+			// cur = maintain(cur);
 			return cur;
 		}
 
@@ -191,9 +193,11 @@ public class Code01_SizeBalancedTreeMap {
 				throw new RuntimeException("invalid parameter.");
 			}
 			SBTNode<K, V> lastNode = findLastIndex(key);
-			return lastNode != null && key.compareTo(lastNode.key) == 0 ? true : false;
+			return lastNode != null && key.compareTo(lastNode.key) == 0 
+					? true : false;
 		}
 
+		// （key，value） put -> 有序表   新增、改value
 		public void put(K key, V value) {
 			if (key == null) {
 				throw new RuntimeException("invalid parameter.");

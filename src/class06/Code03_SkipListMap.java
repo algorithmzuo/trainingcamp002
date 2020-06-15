@@ -8,23 +8,11 @@ public class Code03_SkipListMap {
 	public static class SkipListNode<K extends Comparable<K>, V> {
 		public K key;
 		public V val;
-		// 0  nextNodes.get(0)
-		// 1  nextNodes.get(1)
-		// i  nextNodes.get(i)
-		// nextNodes.size()
 		public ArrayList<SkipListNode<K, V>> nextNodes;
 
 		public SkipListNode(K k, V v) {
 			key = k;
 			val = v;
-			// node  7层指针
-			// nextNodes.add(null)
-			// nextNodes.add(null)
-			// nextNodes.add(null)
-			// nextNodes.add(null)
-			// nextNodes.add(null)
-			// nextNodes.add(null)
-			// nextNodes.add(null)
 			nextNodes = new ArrayList<SkipListNode<K, V>>();
 		}
 
@@ -32,9 +20,6 @@ public class Code03_SkipListMap {
 		// 头(null), 头节点的null，认为最小
 		// node  -> 头，node(null, "")  node.isKeyLess(!null)  true
 		// node里面的key是否比otherKey小，true，不是false
-
-		
-		
 		public boolean isKeyLess(K otherKey) {
 			//  otherKey == null -> false 
 			return otherKey != null && (key == null || key.compareTo(otherKey) < 0);
@@ -55,7 +40,7 @@ public class Code03_SkipListMap {
 
 		public SkipListMap() {
 			head = new SkipListNode<K, V>(null, null);
-			head.nextNodes.add(null);
+			head.nextNodes.add(null); // 0
 			size = 0;
 			maxLevel = 0;
 		}
@@ -97,20 +82,23 @@ public class Code03_SkipListMap {
 			return next != null && next.isKeyEqual(key);
 		}
 
+		// 新增、改value
 		public void put(K key, V value) {
 			if (key == null) {
 				return;
 			}
+			// 0层上，最右一个，< key 的Node -> >key
 			SkipListNode<K, V> less = mostRightLessNodeInTree(key);
 			SkipListNode<K, V> find = less.nextNodes.get(0);
 			if (find != null && find.isKeyEqual(key)) {
 				find.val = value;
-			} else {
+			} else { // find == null   8   7   9
 				size++;
 				int newNodeLevel = 0;
 				while (Math.random() < PROBABILITY) {
 					newNodeLevel++;
 				}
+				// newNodeLevel
 				while (newNodeLevel > maxLevel) {
 					head.nextNodes.add(null);
 					maxLevel++;
@@ -122,6 +110,7 @@ public class Code03_SkipListMap {
 				int level = maxLevel;
 				SkipListNode<K, V> pre = head;
 				while (level >= 0) {
+					// level 层中，找到最右的 < key 的节点
 					pre = mostRightLessNodeInLevel(key, pre, level);
 					if (level <= newNodeLevel) {
 						newNode.nextNodes.set(level, pre.nextNodes.get(level));
@@ -252,6 +241,7 @@ public class Code03_SkipListMap {
 		System.out.println("======================");
 		System.out.println(test.floorKey("D"));
 		System.out.println(test.ceillingKey("D"));
+		
 
 	}
 

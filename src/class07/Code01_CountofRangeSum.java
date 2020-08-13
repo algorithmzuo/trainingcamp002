@@ -78,30 +78,36 @@ public class Code01_CountofRangeSum {
 			return rightNode;
 		}
 
-		private SBTNode matain(SBTNode cur) {
+		private SBTNode maintain(SBTNode cur) {
 			if (cur == null) {
 				return null;
 			}
-			if (cur.l != null && cur.l.l != null && cur.r != null && cur.l.l.size > cur.r.size) {
+			long leftSize = cur.l != null ? cur.l.size : 0;
+			long leftLeftSize = cur.l != null && cur.l.l != null ? cur.l.l.size : 0;
+			long leftRightSize = cur.l != null && cur.l.r != null ? cur.l.r.size : 0;
+			long rightSize = cur.r != null ? cur.r.size : 0;
+			long rightLeftSize = cur.r != null && cur.r.l != null ? cur.r.l.size : 0;
+			long rightRightSize = cur.r != null && cur.r.r != null ? cur.r.r.size : 0;
+			if (leftLeftSize > rightSize) {
 				cur = rightRotate(cur);
-				cur.r = matain(cur.r);
-				cur = matain(cur);
-			} else if (cur.l != null && cur.l.r != null && cur.r != null && cur.l.r.size > cur.r.size) {
+				cur.r = maintain(cur.r);
+				cur = maintain(cur);
+			} else if (leftRightSize > rightSize) {
 				cur.l = leftRotate(cur.l);
 				cur = rightRotate(cur);
-				cur.l = matain(cur.l);
-				cur.r = matain(cur.r);
-				cur = matain(cur);
-			} else if (cur.r != null && cur.r.r != null && cur.l != null && cur.r.r.size > cur.l.size) {
+				cur.l = maintain(cur.l);
+				cur.r = maintain(cur.r);
+				cur = maintain(cur);
+			} else if (rightRightSize > leftSize) {
 				cur = leftRotate(cur);
-				cur.l = matain(cur.l);
-				cur = matain(cur);
-			} else if (cur.r != null && cur.r.l != null && cur.l != null && cur.r.l.size > cur.l.size) {
+				cur.l = maintain(cur.l);
+				cur = maintain(cur);
+			} else if (rightLeftSize > leftSize) {
 				cur.r = rightRotate(cur.r);
 				cur = leftRotate(cur);
-				cur.l = matain(cur.l);
-				cur.r = matain(cur.r);
-				cur = matain(cur);
+				cur.l = maintain(cur.l);
+				cur.r = maintain(cur.r);
+				cur = maintain(cur);
 			}
 			return cur;
 		}
@@ -122,7 +128,7 @@ public class Code01_CountofRangeSum {
 					} else {
 						cur.r = add(cur.r, key, contains);
 					}
-					return matain(cur);
+					return maintain(cur);
 				}
 			}
 		}

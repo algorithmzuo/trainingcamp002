@@ -43,27 +43,27 @@ public class Code02_SizeBalancedTreeMap {
 			return iRight;
 		}
 
-		private int matain(int index) {
+		private int maintain(int index) {
 			if (size[left[left[index]]] > size[right[index]]) {
 				index = rightRotate(index);
-				right[index] = matain(right[index]);
-				index = matain(index);
+				right[index] = maintain(right[index]);
+				index = maintain(index);
 			} else if (size[right[left[index]]] > size[right[index]]) {
 				left[index] = leftRotate(left[index]);
 				index = rightRotate(index);
-				left[index] = matain(left[index]);
-				right[index] = matain(right[index]);
-				index = matain(index);
+				left[index] = maintain(left[index]);
+				right[index] = maintain(right[index]);
+				index = maintain(index);
 			} else if (size[right[right[index]]] > size[left[index]]) {
 				index = leftRotate(index);
-				left[index] = matain(left[index]);
-				index = matain(index);
+				left[index] = maintain(left[index]);
+				index = maintain(index);
 			} else if (size[left[right[index]]] > size[left[index]]) {
 				right[index] = rightRotate(right[index]);
 				index = leftRotate(index);
-				left[index] = matain(left[index]);
-				right[index] = matain(right[index]);
-				index = matain(index);
+				left[index] = maintain(left[index]);
+				right[index] = maintain(right[index]);
+				index = maintain(index);
 			}
 			return index;
 		}
@@ -134,7 +134,7 @@ public class Code02_SizeBalancedTreeMap {
 				} else {
 					right[index] = add(right[index], key, value);
 				}
-				return matain(index);
+				return maintain(index);
 			}
 		}
 

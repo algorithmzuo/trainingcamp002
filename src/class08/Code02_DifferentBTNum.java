@@ -37,20 +37,22 @@ public class Code02_DifferentBTNum {
 		}
 		long a = 1;
 		long b = 1;
-		long limit = N << 1;
-		for (long i = 1; i <= limit; i++) {
-			if (i <= N) {
-				a *= i;
-			} else {
-				b *= i;
-			}
+		for (int i = 1, j = N + 1; i <= N; i++, j++) {
+			a *= i;
+			b *= j;
+			long gcd = gcd(a, b);
+			a /= gcd;
+			b /= gcd;
 		}
 		return (b / a) / (N + 1);
 	}
 
+	public static long gcd(long m, long n) {
+		return n == 0 ? m : gcd(n, m % n);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("test begin");
-		// i再大会溢出
 		for (int i = 0; i < 15; i++) {
 			long ans1 = num1(i);
 			long ans2 = num2(i);

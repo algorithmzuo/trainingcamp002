@@ -1,4 +1,4 @@
-package class05;
+package class06;
 
 /**
  * Not implemented by zuochengyun

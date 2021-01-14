@@ -1,4 +1,4 @@
-package class06;
+package class05;
 
 import java.util.ArrayList;
 
@@ -173,7 +173,7 @@ public class Code03_SkipListMap {
 			return cur.key;
 		}
 
-		public K ceillingKey(K key) {
+		public K ceilingKey(K key) {
 			if (key == null) {
 				return null;
 			}
@@ -234,13 +234,13 @@ public class Code03_SkipListMap {
 		System.out.println(test.firstKey());
 		System.out.println(test.lastKey());
 		System.out.println(test.floorKey("D"));
-		System.out.println(test.ceillingKey("D"));
+		System.out.println(test.ceilingKey("D"));
 		System.out.println("======================");
 		test.remove("D");
 		printAll(test);
 		System.out.println("======================");
 		System.out.println(test.floorKey("D"));
-		System.out.println(test.ceillingKey("D"));
+		System.out.println(test.ceilingKey("D"));
 		
 
 	}

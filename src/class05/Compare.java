@@ -3,7 +3,7 @@ package class05;
 import java.util.TreeMap;
 
 import class05.Code01_AVLTreeMap.AVLTreeMap;
-import class05.Code01_SizeBalancedTreeMap.SizeBalancedTreeMap;
+import class05.Code02_SizeBalancedTreeMap.SizeBalancedTreeMap;
 import class05.Code03_SkipListMap.SkipListMap;
 
 // 本文件为avl、sbt、skiplist三种结构的测试文件
